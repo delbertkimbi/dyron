@@ -1,2 +1,2 @@
 # dyron
-Ditigial real estate application
+Ditigial real estate app
