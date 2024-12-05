@@ -88,7 +88,7 @@
             <button type="submit">Sign In</button>
         </form>
         <div class="links">
-            <p><a href="forgot-password.html">Forgot Password?</a></p>
+            <p><a href="forgot_password.html">Forgot Password?</a></p>
             <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
         </div>
     </div>
@@ -97,7 +97,6 @@
         document.getElementById('signinForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Reset error messages
             document.querySelectorAll('.error').forEach(el => el.textContent = '');
 
             const email = document.getElementById('email').value;
