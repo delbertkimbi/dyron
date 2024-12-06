@@ -25,6 +25,7 @@
             max-width: 1300px;
             margin: 0 auto;
             align-items: center;
+            z-index: 0;
             padding: 0 20px;
         }
         
@@ -105,11 +106,6 @@
         .categories, .featured-products {
             margin-bottom: 3rem;
         }
-        
-   
-    
-
-
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -121,18 +117,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: white;
+            background: var(--gradient-bg);
             border-radius: 12px;
             padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            /* color: var(--text-color); */
             overflow: hidden;
             position: relative;
-            /* background: var(--gradient-bg); */
-            color: var(--primary-color);
+            color: white
+            
         }
 
         .category-item img {
@@ -277,7 +272,7 @@
         <section class="categories">
             <h2>Property Categories</h2>
             <div class="category-grid">
-                <a href="#" class="category-item" style="background-color: #e6f2ff;">
+                <a href="#" class="category-item">
                     <img src="images/h3.jpeg" alt="Homes">
                     <span>Homes</span>
                 </a>
