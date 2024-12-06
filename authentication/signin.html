@@ -96,7 +96,7 @@
     <script>
         document.getElementById('signinForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             document.querySelectorAll('.error').forEach(el => el.textContent = '');
 
             const email = document.getElementById('email').value;
@@ -117,10 +117,9 @@
             }
 
             if (isValid) {
-                // Simulate form submission
-                alert('Sign in successful! Redirecting to dashboard...');
-                // Redirect to dashboard (you can change this to the appropriate URL)
-                // window.location.href = 'dashboard.html';
+                //Simulate form submission
+                // alert('Sign in successful! Redirecting to dashboard...');
+                window.location.href = '../index.html';
             }
         });
     </script>

@@ -10,8 +10,8 @@
             --secondary-color: #f0f0f0;
             --text-color: #333;
             --light-text-color: #666;
-        }
-        
+            --gradient-bg: linear-gradient(135deg, #0066cc, #4da8f0);
+        }  
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -20,10 +20,11 @@
             color: var(--text-color);
             line-height: 1.6;
         }
-        
+ 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
+            align-items: center;
             padding: 0 20px;
         }
         
@@ -49,6 +50,7 @@
         nav ul {
             list-style-type: none;
             display: flex;
+            align-items: center;
             gap: 1rem;
         }
         
@@ -104,36 +106,50 @@
             margin-bottom: 3rem;
         }
         
+   
+    
+
+
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
-        
+
         .category-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: white;
-            border-radius: 8px;
+            background: white;
+            border-radius: 12px;
             padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            color: var(--text-color);
+            /* color: var(--text-color); */
+            overflow: hidden;
+            position: relative;
+            /* background: var(--gradient-bg); */
+            color: var(--primary-color);
         }
-        
+
+        .category-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item:hover img {
+            transform: scale(1.2);
+        }
+
         .category-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .category-item img {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 0.5rem;
         }
         
         .product-grid {
@@ -224,6 +240,15 @@
             border-top: 1px solid #ddd;
             color: var(--light-text-color);
         }
+        .login{
+            background-color: #0066cc;
+            color: white;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -232,10 +257,11 @@
             <nav>
                 <a href="index.html" class="logo">Dyron</a>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#">Dream Property</a></li>
+                    <li><a href="#">About Dyron</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="authentication/signin.html"><div class="login">Sign In</div></a></li>
                 </ul>
             </nav>
         </div>
@@ -243,7 +269,6 @@
 
     <main class="container">
         <h1>Find Your Perfect Property</h1>
-        
         <form class="search-form">
             <input type="search" placeholder="Search for properties...">
             <button type="submit">Search</button>
@@ -253,19 +278,19 @@
             <h2>Property Categories</h2>
             <div class="category-grid">
                 <a href="#" class="category-item" style="background-color: #e6f2ff;">
-                    <img src="https://via.placeholder.com/64/0066cc/FFFFFF?text=Home" alt="Homes">
+                    <img src="images/h3.jpeg" alt="Homes">
                     <span>Homes</span>
                 </a>
                 <a href="#" class="category-item" style="background-color: #fff0e6;">
-                    <img src="https://via.placeholder.com/64/ff6600/FFFFFF?text=Apt" alt="Apartments">
+                    <img src="images/h2.jpeg" alt="Apartments">
                     <span>Apartments</span>
                 </a>
                 <a href="#" class="category-item" style="background-color: #e6ffe6;">
-                    <img src="https://via.placeholder.com/64/00cc66/FFFFFF?text=Hotel" alt="Hotels">
+                    <img src="images/wdc.jpeg" alt="Hotels">
                     <span>Hotels</span>
                 </a>
                 <a href="#" class="category-item" style="background-color: #ffe6e6;">
-                    <img src="https://via.placeholder.com/64/cc0000/FFFFFF?text=Land" alt="Land">
+                    <img src="images/l1.jpeg" alt="Land">
                     <span>Land</span>
                 </a>
             </div>
@@ -275,57 +300,66 @@
             <h2>Featured Properties</h2>
             <div class="product-grid">
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=Modern+Apartment" alt="Modern Apartment">
+                    <img src="images/apartment.jpg" alt="Modern Apartment">
                     <div class="product-info">
-                        <h3>Modern Apartment</h3>
+                        <h3>Agape House</h3>
                         <p>Type: Apartment</p>
-                        <p>Location: Downtown</p>
-                        <p class="product-price">$250,000</p>
+                        <p>Location: Buea town</p>
+                        <p class="product-price">55,000 XAF/month</p>
                     </div>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=Cozy+House" alt="Cozy House">
+                    <img src="images/room.webp" alt="Cozy House">
                     <div class="product-info">
-                        <h3>Cozy House</h3>
-                        <p>Type: Single Family Home</p>
-                        <p>Location: Suburbs</p>
-                        <p class="product-price">$350,000</p>
+                        <h3>Jordan Breeze Cite</h3>
+                        <p>Type: Single Room</p>
+                        <p>Location: Ndongo</p>
+                        <p class="product-price">350,000 XAF/yr</p>
                     </div>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=Luxury+Villa" alt="Luxury Villa">
+                    <img src="images/h2.jpeg" alt="Luxury Villa">
                     <div class="product-info">
-                        <h3>Luxury Villa</h3>
-                        <p>Type: Villa</p>
-                        <p>Location: Beachfront</p>
-                        <p class="product-price">$1,200,000</p>
+                        <h3>Nano Cite</h3>
+                        <p>Type: Studios</p>
+                        <p>Location: Dirty South</p>
+                        <p class="product-price">420,000 XAF/yr</p>
                     </div>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=City+Penthouse" alt="City Penthouse">
+                    <img src="images/blue_empire.jpg" alt="City Penthouse">
                     <div class="product-info">
-                        <h3>City Penthouse</h3>
-                        <p>Type: Penthouse</p>
-                        <p>Location: City Center</p>
-                        <p class="product-price">$800,000</p>
+                        <h3>Blue Empire</h3>
+                        <p>Type: Hotel</p>
+                        <p>Location: Molyko</p>
+                        <p class="product-price">80,000 XAF/N</p>
                     </div>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=Rustic+Cabin" alt="Rustic Cabin">
+                    <img src="images/gh.jpeg" alt="Rustic Cabin">
                     <div class="product-info">
-                        <h3>Rustic Cabin</h3>
-                        <p>Type: Cabin</p>
-                        <p>Location: Mountain Area</p>
-                        <p class="product-price">$180,000</p>
+                        <h3>Botaffo House</h3>
+                        <p>Type: Guess House</p>
+                        <p>Location: Ub Junction</p>
+                        <p class="product-price">20,000 XAF/N</p>
                     </div>
                 </div>
                 <div class="product-item">
-                    <img src="https://via.placeholder.com/300x200?text=Seaside+Cottage" alt="Seaside Cottage">
+                    <img src="images/wdc.jpeg" alt="Rustic Cabin">
                     <div class="product-info">
-                        <h3>Seaside Cottage</h3>
-                        <p>Type: Cottage</p>
-                        <p>Location: Coastal Village</p>
-                        <p class="product-price">$420,000</p>
+                        <h3>WDC Hotel</h3>
+                        <p>Type: Hotel</p>
+                        <p>Location: Mile</p>
+                        <p class="product-price">80,000 XAF/N</p>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="images/l1.jpeg" alt="Seaside Cottage">
+                    <div class="product-info">
+                        <h3>Landed Property</h3>
+                        <p>Type: Land</p>
+                        <p>Location: Bokwia Buea</p>
+                        <p class="product-price">5,200,000 XAF</p>
                     </div>
                 </div>
             </div>
@@ -351,11 +385,11 @@
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <p>Email: info@dyron.com</p>
-                    <p>Phone: (123) 456-7890</p>
+                    <p>Phone: (+237) 674-208-573</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Dyron. All rights reserved.</p>
+                <p>&copy; 2024 Dyron. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -365,7 +399,6 @@
             e.preventDefault();
             const searchTerm = this.querySelector('input').value;
             alert('Searching for: ' + searchTerm);
-            // Here you would typically send the search term to a server or update the page content
         });
     </script>
 </body>
