@@ -88,7 +88,7 @@
             <button type="submit">Sign In</button>
         </form>
         <div class="links">
-            <p><a href="forgot-password.html">Forgot Password?</a></p>
+            <p><a href="forgot_password.html">Forgot Password?</a></p>
             <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
         </div>
     </div>
@@ -96,8 +96,7 @@
     <script>
         document.getElementById('signinForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Reset error messages
+
             document.querySelectorAll('.error').forEach(el => el.textContent = '');
 
             const email = document.getElementById('email').value;
@@ -118,10 +117,9 @@
             }
 
             if (isValid) {
-                // Simulate form submission
-                alert('Sign in successful! Redirecting to dashboard...');
-                // Redirect to dashboard (you can change this to the appropriate URL)
-                // window.location.href = 'dashboard.html';
+                //Simulate form submission
+                // alert('Sign in successful! Redirecting to dashboard...');
+                window.location.href = '../index.html';
             }
         });
     </script>
