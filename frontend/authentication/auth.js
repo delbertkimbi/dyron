@@ -75,3 +75,29 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         window.location.href = '../index.html';
     }
 });
+
+
+
+document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Reset error messages
+    document.querySelectorAll('.error').forEach(el => el.textContent = '');
+    document.getElementById('successMessage').textContent = '';
+
+    const email = document.getElementById('email').value;
+
+    let isValid = true;
+
+    // Email validation
+    if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email address';
+        isValid = false;
+    }
+
+    if (isValid) {
+        // Simulate password reset request
+        document.getElementById('successMessage').textContent = 'Password reset instructions have been sent to your email.';
+        document.getElementById('email').value = '';
+    }
+});
