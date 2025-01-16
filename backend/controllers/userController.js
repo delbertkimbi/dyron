@@ -4,8 +4,10 @@ const bcrypt = require('bcrypt');
 // Signup a new user
 exports.signupUser = async (req, res) => {
   const { name, email, password, phone, role } = req.body;
+  console.log('Received request data:', { name, email, phone, role }); 
 
   if (!name || !email || !password || !role) {
+    console.log(name, email, password, role, phone);
     return res.status(400).json({ error: 'All fields are required' });
   }
 
