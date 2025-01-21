@@ -1,0 +1,15 @@
+# Environment variables
+.env
+.env.test
+.env.local
+.env.development
+.env.production
+
+# Dependencies
+node_modules/
+
+# Coverage reports
+coverage/
+
+# Logs
+*.log 
