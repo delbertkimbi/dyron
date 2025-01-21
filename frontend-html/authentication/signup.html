@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyron - Sign Up</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #0066cc;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input, select {
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fafafa;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus, select:focus {
+            border-color: #0066cc;
+            background-color: #fff;
+            outline: none;
+        }
+
+        select {
+            appearance: none;
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            margin-top: 1.2rem;
+        }
+
+        button:hover {
+            background-color: #004a8f;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        .links {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .links a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Indicator */
+        .loading {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #0066cc;
+            display: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input, select, button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up for Dyron</h1>
+        <form id="signupForm">
+            <!-- User Info Section -->
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+            <div id="usernameError" class="error"></div>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+            <div id="passwordError" class="error"></div>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+            <div id="confirmPasswordError" class="error"></div>
+
+            <!-- Contact Info Section -->
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" required placeholder="Enter your phone number">
+            <div id="phoneError" class="error"></div>
+
+            <!-- Role Selection Section -->
+            <label for="role">What are you looking to do on Dyron?</label>
+            <select id="role" name="role" required>
+                <option value="">Select</option>
+                <option value="buy">Buy Real Estate</option>
+                <option value="sell">Sell Real Estate</option>
+            </select>
+            <div id="roleError" class="error"></div>
+
+            <!-- Submit Button -->
+            <button type="submit">Sign Up</button>
+            
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading">Please wait... We're processing your data!</div>
+        </form>
+
+        <div class="links">
+            <p>Already have an account? <a href="signin.html">Sign In</a></p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

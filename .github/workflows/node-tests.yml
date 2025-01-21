@@ -1,0 +1,75 @@
+name: Node.js Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: DE12kimb
+          MYSQL_DATABASE: dyron
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+
+    - name: Install dependencies
+      working-directory: backend
+      run: npm ci
+
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
+          sleep 1
+        done
+
+    - name: Set up database schema
+      run: |
+        mysql -h127.0.0.1 -uroot -pDE12kimb dyron < backend/database/schema.sql
+      
+    - name: Run tests
+      working-directory: backend
+      env:
+        DB_HOST: 127.0.0.1
+        DB_USER: root
+        DB_PASSWORD: DE12kimb
+        DB_NAME: dyron
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        NODE_ENV: test
+      run: npm test -- --coverage
+
+    - name: Upload coverage reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: backend/coverage/
+
+    - name: Check test coverage
+      working-directory: backend
+      run: |
+        COVERAGE=$(npm test -- --coverage --coverageReporters="text-summary" | grep "All files" | awk '{print $4}' | cut -d'.' -f1)
+        if [ "$COVERAGE" -lt 80 ]; then
+          echo "Test coverage ($COVERAGE%) is below 80%"
+          exit 1
+        fi 

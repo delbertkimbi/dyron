@@ -1,0 +1,90 @@
+backend/
+├── app.js              # Main application entry point
+├── config/
+│   └── dbConfig.js     # Database configuration
+├── controllers/
+│   └── userController.js # User-related business logic
+├── routes/
+│   └── userRoutes.js   # User route definitions
+└── package.json        # Project dependencies
+
+
+frontend 1/
+├── index.html         # Main landing page
+├── style.css         # Global styles
+├── script.js         # Main JavaScript file
+└── authentication/   # Authentication related pages
+    ├── signin.html
+    ├── signup.html
+    ├── forgot_password.html
+    └── auth.js
+
+
+
+    backend/
+├── controllers/
+│   ├── propertyController.js
+│   ├── userController.js
+│   └── bookingController.js
+├── models/
+│   ├── Property.js
+│   ├── User.js
+│   └── Booking.js
+├── routes/
+│   ├── propertyRoutes.js
+│   └── userRoutes.js
+└── middleware/
+    ├── auth.js
+    └── upload.js
+
+
+
+
+    frontend/
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   └── Navigation.jsx
+│   │   ├── property/
+│   │   │   ├── PropertyCard.jsx
+│   │   │   ├── PropertyGrid.jsx
+│   │   │   └── PropertyDetails.jsx
+│   │   └── auth/
+│   │       ├── Login.jsx
+│   │       └── Register.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Properties.jsx
+│   │   └── Dashboard.jsx
+│   ├── services/
+│   │   ├── api.js
+│   │   └── auth.js
+│   └── context/
+│       └── AuthContext.jsx
+
+
+
+
+backend/
+├── config/
+│   ├── dbConfig.js
+│   └── constants.js
+├── controllers/
+│   ├── userController.js
+│   ├── propertyController.js
+│   └── transactionController.js
+├── middleware/
+│   ├── auth.js
+│   ├── validation.js
+│   └── errorHandler.js
+├── routes/
+│   ├── userRoutes.js
+│   ├── propertyRoutes.js
+│   └── transactionRoutes.js
+├── utils/
+│   ├── validators.js
+│   └── helpers.js
+├── app.js
+└── .env
