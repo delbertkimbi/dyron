@@ -37,6 +37,21 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Mobile menu button */}
+          <div className="flex items-center sm:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md bg-white text-primary-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm border border-gray-200"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? (
+                <XMarkIcon className="block h-6 w-6" />
+              ) : (
+                <Bars3Icon className="block h-6 w-6" />
+              )}
+            </button>
+          </div>
+
           {/* Desktop Menu - Right aligned */}
           <div className="hidden sm:flex sm:items-center sm:space-x-8">
             {navItems.map((item) => (
@@ -66,20 +81,6 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-
-          {/* Mobile menu button */}
-          <div className="sm:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-800 hover:text-primary-600 transition-colors p-2"
-            >
-              {isOpen ? (
-                <XMarkIcon className="h-6 w-6" />
-              ) : (
-                <Bars3Icon className="h-6 w-6" />
-              )}
-            </button>
-          </div>
         </div>
       </div>
 
@@ -87,7 +88,7 @@ const Navbar = () => {
       <motion.div
         initial={false}
         animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-        className="sm:hidden overflow-hidden bg-white border-t border-gray-100"
+        className="sm:hidden overflow-hidden bg-white"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (

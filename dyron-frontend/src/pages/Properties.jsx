@@ -21,7 +21,9 @@ const Properties = () => {
         setLoading(true);
         const data = await propertyService.getAllProperties();
         if (data) {
-          setDbProperties(data);
+          // Filter out any null or undefined entries
+          const validProperties = data.filter(property => property && property.id);
+          setDbProperties(validProperties);
         }
       } catch (error) {
         console.error('Error fetching properties:', error);
@@ -33,7 +35,7 @@ const Properties = () => {
     fetchProperties();
   }, []);
 
-  // Show static properties first, then database properties
+  // Combine sample and database properties
   const allProperties = [...sampleProperties, ...dbProperties];
 
   const locations = ['all', 'Molyko', 'Buea town', 'Mile 17', 'Dirty South', 'UB Junction', 'Ndongo'];
@@ -46,6 +48,7 @@ const Properties = () => {
     { label: 'Above 500,000 XAF', value: '500000-above' }
   ];
 
+  // Filter properties based on search and filters
   const filterProperties = (property) => {
     const matchesSearch = searchTerm === '' || 
       property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -65,6 +68,10 @@ const Properties = () => {
   };
 
   const filteredProperties = allProperties.filter(filterProperties);
+
+  // Group properties by source
+  const sampleFilteredProperties = filteredProperties.filter(p => p.id <= sampleProperties.length);
+  const dbFilteredProperties = filteredProperties.filter(p => p.id > sampleProperties.length);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -136,7 +143,6 @@ const Properties = () => {
           </h2>
         </div>
 
-        {/* Properties Grid */}
         {loading ? (
           <div className="flex justify-center py-12">
             <motion.div
@@ -146,23 +152,43 @@ const Properties = () => {
             />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProperties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
-        )}
+          <>
+            {/* Sample Properties Section */}
+            {sampleFilteredProperties.length > 0 && (
+              <div className="mb-12">
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Featured Properties</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {sampleFilteredProperties.map((property) => (
+                    <PropertyCard key={property.id} property={property} />
+                  ))}
+                </div>
+              </div>
+            )}
 
-        {/* No Results */}
-        {filteredProperties.length === 0 && !loading && (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              No properties found
-            </h3>
-            <p className="text-gray-600">
-              Try adjusting your search or filter criteria
-            </p>
-          </div>
+            {/* Database Properties Section */}
+            {dbFilteredProperties.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Listed Properties</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {dbFilteredProperties.map((property) => (
+                    <PropertyCard key={property.id} property={property} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* No Results Message */}
+            {filteredProperties.length === 0 && (
+              <div className="text-center py-12">
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  No properties found
+                </h3>
+                <p className="text-gray-600">
+                  Try adjusting your search or filter criteria
+                </p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -21,52 +21,54 @@ function App() {
     <ErrorBoundary>
       <Router>
         <AuthProvider>
-          <Layout>
-            <Toaster position="top-right" />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/properties" element={<Properties />} />
-              <Route path="/properties/:id" element={<PropertyDetails />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-              
-              <Route
-                path="/dashboard/buyer"
-                element={
-                  <ProtectedRoute roles={['buyer']}>
-                    <BuyerDashboard />
-                  </ProtectedRoute>
-                }
-              />
-              
-              <Route
-                path="/dashboard/seller"
-                element={
-                  <ProtectedRoute roles={['seller']}>
-                    <SellerDashboard />
-                  </ProtectedRoute>
-                }
-              />
-              
-              <Route
-                path="/properties/add"
-                element={
-                  <ProtectedRoute roles={['seller']}>
-                    <AddProperty />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </Layout>
+          <div className="w-full min-h-screen bg-gray-50">
+            <Layout>
+              <Toaster position="top-right" />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/properties" element={<Properties />} />
+                <Route path="/properties/:id" element={<PropertyDetails />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                
+                <Route
+                  path="/dashboard/buyer"
+                  element={
+                    <ProtectedRoute roles={['buyer']}>
+                      <BuyerDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                
+                <Route
+                  path="/dashboard/seller"
+                  element={
+                    <ProtectedRoute roles={['seller']}>
+                      <SellerDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                
+                <Route
+                  path="/properties/add"
+                  element={
+                    <ProtectedRoute roles={['seller']}>
+                      <AddProperty />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </Layout>
+          </div>
         </AuthProvider>
       </Router>
     </ErrorBoundary>
