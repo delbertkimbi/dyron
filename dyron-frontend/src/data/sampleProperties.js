@@ -31,10 +31,10 @@ export const sampleProperties = [
   },
   {
     id: 3,
-    title: "Nano Cite",
-    type: "apartment",
-    location: "Dirty South",
-    price: 420000,
+    title: "Landed Property",
+    type: "land",
+    location: "Bokwai Buea",
+    price: 4200000,
     status: "available",
     images: [l1],
     description: "Modern studio apartments"
@@ -53,7 +53,7 @@ export const sampleProperties = [
     id: 5,
     title: "Botaffo House",
     type: "guest house",
-    location: "UB Junction",
+    location: "Molyko",
     price: 20000,
     status: "available",
     images: [gh],

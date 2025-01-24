@@ -1,0 +1,65 @@
+name: Dyron CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: GitGuardian scan
+        uses: GitGuardian/ggshield-action@master
+        env:
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
+  test:
+    needs: security
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Create test environment file
+        run: |
+          echo "DB_HOST=${{ secrets.TEST_DB_HOST }}" >> backend/.env.test
+          echo "DB_USER=${{ secrets.TEST_DB_USER }}" >> backend/.env.test
+          echo "DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }}" >> backend/.env.test
+          echo "DB_NAME=${{ secrets.TEST_DB_NAME }}" >> backend/.env.test
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> backend/.env.test
+
+      - name: Install dependencies
+        run: |
+          cd backend && npm ci
+          cd ../dyron-frontend && npm ci
+
+      - name: Run tests
+        run: |
+          cd backend && npm test
+          cd ../dyron-frontend && npm test
+
+  deploy:
+    needs: [security, test]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Deploy to Railway
+        uses: bervProject/railway-deploy@main
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }} 

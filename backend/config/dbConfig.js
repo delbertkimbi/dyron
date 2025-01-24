@@ -8,18 +8,28 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    connectTimeout: 30000,
+    acquireTimeout: 30000
 });
 
-// Test database connection
-pool.getConnection()
-    .then(connection => {
+// Add retry logic for initial connection
+const connectWithRetry = async () => {
+    try {
+        const connection = await pool.getConnection();
         console.log('Successfully connected to the database');
         connection.release();
-    })
-    .catch(err => {
+    } catch (err) {
         console.error('Database connection failed:', err);
-        process.exit(1);
-    });
+        console.log('Retrying in 5 seconds...');
+        setTimeout(connectWithRetry, 5000);
+    }
+};
+
+connectWithRetry();
+
+pool.query('SELECT 1')
+    .then(() => console.log('Database connected successfully'))
+    .catch(err => console.error('Database connection error:', err));
 
 module.exports = pool;

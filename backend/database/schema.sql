@@ -1,4 +1,4 @@
--- Create users table
+-- Create users table if not exists
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
@@ -15,12 +15,13 @@ CREATE TABLE IF NOT EXISTS properties (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   price DECIMAL(10, 2) NOT NULL,
-  location VARCHAR(100) NOT NULL,
-  type VARCHAR(50) NOT NULL,
+  location VARCHAR(45) NOT NULL,
+  type ENUM('room', 'apartment', 'land', 'hotel', 'guest house') NOT NULL,
   images JSON,
-  status VARCHAR(20) DEFAULT 'available',
+  status ENUM('available', 'sold') DEFAULT 'available',
   user_id INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
